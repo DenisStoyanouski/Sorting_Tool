@@ -5,8 +5,16 @@ import java.util.*;
 
 public class Main {
 
-    static List<Long> numbers = new ArrayList<>();
+    static Collection<Long> numbers = new ArrayList<>();
+
+    static String typeOfData;
+
+
     public static void main(final String[] args) {
+
+        typeOfData = args.length == 2 ? args[1] : "word";
+
+
         Scanner scanner = new Scanner(System.in);
 
         while (scanner.hasNextLong()) {
@@ -20,4 +28,17 @@ public class Main {
         System.out.printf("Total numbers: %d%n", number);
         System.out.printf("The greatest number: %d (%d time(s)).", maxValue, count);
     }
+
+    private static void chooseReader() {
+        switch(typeOfData) {
+            case "long" : readLongs();
+            break;
+            case "line" : readLines();
+            break;
+            case "word" : readWords();
+            break;
+            default:  break;
+        }
+    }
+
 }
