@@ -28,7 +28,6 @@ public class WordReader extends Reader{
     @Override
     public void printData() {
         System.out.printf("Total words: %d%n", number);
-        System.out.printf("Total longest word: %n%s%n", maxValue);
-        System.out.printf("(%d time(s), d%%).%n", count, count / words.size());
+        System.out.printf("Total longest word: %s (%d time(s), %d%%).%n", maxValue.get(), count, count * 100 / number);
     }
 }

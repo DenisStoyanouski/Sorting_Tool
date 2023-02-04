@@ -32,6 +32,6 @@ public class LongReader extends Reader{
     @Override
     public void printData() {
         System.out.printf("Total numbers: %d%n", number);
-        System.out.printf("The greatest number: %d (%d time(s)).", maxValue, count);
+        System.out.printf("The greatest number: %d (%d time(s) %d%%).%n", maxValue, count, count * 100 / number);
     }
 }

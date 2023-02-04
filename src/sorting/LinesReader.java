@@ -28,7 +28,7 @@ public class LinesReader extends Reader{
     @Override
     public void printData() {
         System.out.printf("Total lines: %d%n", number);
-        System.out.printf("Total longest line: %n%s%n", maxValue);
-        System.out.printf("(%d time(s), d%%).%n", count, count / lines.size());
+        System.out.printf("Total longest line: %n%s%n", maxValue.get());
+        System.out.printf("(%d time(s), %d%%).%n", count, count * 100 / number);
     }
 }
