@@ -9,13 +9,13 @@ public class LinesReader extends Reader{
     private Optional<String> maxValue;
     private int count;
 
-    boolean sort;
+    private final String sortingType;
 
 
     static Collection<String> lines = new ArrayList<>();
 
-    public LinesReader(boolean sort) {
-        this.sort = sort;
+    public LinesReader(String sortingType) {
+        this.sortingType = sortingType;
     }
 
 

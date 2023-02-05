@@ -1,21 +1,23 @@
 package sorting;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public class Main {
 
-    static String typeOfData;
+    static String typeOfData = "word";
 
-    static boolean sort;
+    static String sortingType = "natural";
 
 
     public static void main(final String[] args) {
-        if (Arrays.asList(args).contains("-sortIntegers")) {
-            typeOfData = "long";
-            sort = true;
-        } else {
-            typeOfData = args.length == 2 ? args[1] : "word";
-            sort = false;
+        ArrayList<String> arguments = Arrays.stream(args).collect(Collectors.toCollection(ArrayList::new));
+        if (arguments.contains("-dataType")) {
+            typeOfData = arguments.get(arguments.indexOf("-dataType") + 1);
+        }
+        if (arguments.contains("-sortingType")) {
+            sortingType = arguments.get(arguments.indexOf("-sortingType") + 1);
         }
         chooseReader();
 
@@ -23,11 +25,11 @@ public class Main {
 
     private static void chooseReader() {
         switch(typeOfData) {
-            case "long" : new LongReader(sort).doTask();
+            case "long" : new LongReader(sortingType).doTask();
             break;
-            case "line" : new LinesReader(sort).doTask();
+            case "line" : new LinesReader(sortingType).doTask();
             break;
-            case "word" : new WordReader(sort).doTask();
+            case "word" : new WordReader(sortingType).doTask();
             break;
             default:  break;
         }

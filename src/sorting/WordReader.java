@@ -9,11 +9,11 @@ public class WordReader extends Reader{
     private Optional<String> maxValue;
     private int count;
 
-    boolean sort;
+    private final String sortingType;
     static Collection<String> words = new ArrayList<>();
 
-    public WordReader(boolean sort) {
-        this.sort = sort;
+    public WordReader(String sortingType) {
+        this.sortingType = sortingType;
     }
 
 

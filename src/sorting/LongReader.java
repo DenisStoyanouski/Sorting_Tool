@@ -1,21 +1,18 @@
 package sorting;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LongReader extends Reader{
     Scanner scanner = new Scanner(System.in);
-    private int number;
-    private long maxValue;
+    private int totalNumber;
     private int count;
-    private boolean sort;
-    static Collection<Long> numbers = new ArrayList<>();
+    private String sortingType;
+    private Collection<Long> numbers = new ArrayList<>();
+    private Map<Long, Integer> counter = new HashMap<>();
 
-    public LongReader(boolean sort) {
-        this.sort = sort;
+    public LongReader(String sortingType) {
+        this.sortingType = sortingType;
     }
 
 
@@ -29,21 +26,28 @@ public class LongReader extends Reader{
 
     @Override
     public void processData() {
-        number = numbers.size();
-        maxValue = Collections.max(numbers);
-        count = (int) numbers.stream().filter(x -> x == maxValue).count();
-
+        totalNumber = numbers.size();
+        for (Long number : numbers) {
+            count = (int) numbers.stream().filter(x -> x == number).count();
+            counter.put(number, count);
+        }
     }
 
     @Override
     public void printData() {
-        if (!sort) {
-            System.out.printf("Total numbers: %d%n", number);
-            System.out.printf("The greatest number: %d (%d time(s) %d%%).%n", maxValue, count, count * 100 / number);
-        } else {
-            System.out.printf("Total numbers: %d%n", number);
+        if ("natural".equals(sortingType)) {
+            System.out.printf("Total numbers: %d%n", totalNumber);
             System.out.printf("Sorted data: %s%n", numbers.stream().sorted().collect(Collectors.toList())
-                    .toString().replaceAll("[,\\[\\]]",""));
+                    .toString().replaceAll("[,\\[\\]]",""));;
+        }
+        if ("byCount".equals(sortingType)) {
+            System.out.printf("Total numbers: %d%n", totalNumber);
+            counter.entrySet()
+                    .stream()
+                    .sorted(Comparator.comparingLong(Map.Entry::getKey))
+                    .sorted(Comparator.comparingInt(Map.Entry::getValue))
+                    .forEach(x -> System.out.printf("%d: %d time(s), %d%% %n", x.getKey(), x.getValue(), x.getValue() * 100 / totalNumber));
+
         }
     }
 }
