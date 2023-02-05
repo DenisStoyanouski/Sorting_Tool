@@ -16,9 +16,14 @@ public class LongsReader extends Reader{
 
     @Override
     public void readData() {
-        while (scanner.hasNextLong()) {
-            long number = scanner.nextLong();
-            numbers.add(number);
+        String number;
+        while (scanner.hasNext()) {
+            number = scanner.next();
+            if (number.matches("[-+]*?\\d+")) {
+                numbers.add(Long.valueOf(number));
+            } else {
+                System.out.printf("\"%s\" is not a long. It will be skipped.%n", number);
+            }
         }
     }
 
