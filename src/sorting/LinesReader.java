@@ -1,21 +1,18 @@
 package sorting;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class LinesReader extends Reader{
 
     Scanner scanner = new Scanner(System.in);
     private int totalLines;
-    private Optional<String> maxValue;
-    private int count;
 
     private final String sortingType;
 
 
     static Collection<String> lines = new ArrayList<>();
 
-    private Map<String, Integer> counter = new HashMap<>();
+    private final Map<String, Integer> counter = new HashMap<>();
 
     public LinesReader(String sortingType) {
         this.sortingType = sortingType;
@@ -34,7 +31,7 @@ public class LinesReader extends Reader{
     public void processData() {
         totalLines = lines.size();
         for (String line : lines) {
-            count = (int) lines.stream().filter(x -> x.equals(line)).count();
+            int count = (int) lines.stream().filter(x -> x.equals(line)).count();
             counter.put(line, count);
         }
     }

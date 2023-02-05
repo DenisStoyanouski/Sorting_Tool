@@ -1,17 +1,15 @@
 package sorting;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
-public class LongReader extends Reader{
+public class LongsReader extends Reader{
     Scanner scanner = new Scanner(System.in);
     private int totalNumber;
-    private int count;
-    private String sortingType;
-    private Collection<Long> numbers = new ArrayList<>();
-    private Map<Long, Integer> counter = new HashMap<>();
+    private final String sortingType;
+    private final Collection<Long> numbers = new ArrayList<>();
+    private final Map<Long, Integer> counter = new HashMap<>();
 
-    public LongReader(String sortingType) {
+    public LongsReader(String sortingType) {
         this.sortingType = sortingType;
     }
 
@@ -28,7 +26,7 @@ public class LongReader extends Reader{
     public void processData() {
         totalNumber = numbers.size();
         for (Long number : numbers) {
-            count = (int) numbers.stream().filter(x -> x == number).count();
+            int count = (int) numbers.stream().filter(x -> Objects.equals(x, number)).count();
             counter.put(number, count);
         }
     }

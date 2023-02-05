@@ -25,11 +25,11 @@ public class Main {
 
     private static void chooseReader() {
         switch(typeOfData) {
-            case "long" : new LongReader(sortingType).doTask();
+            case "long" : new LongsReader(sortingType).doTask();
             break;
             case "line" : new LinesReader(sortingType).doTask();
             break;
-            case "word" : new WordReader(sortingType).doTask();
+            case "word" : new WordsReader(sortingType).doTask();
             break;
             default:  break;
         }
