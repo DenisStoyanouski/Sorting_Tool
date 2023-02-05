@@ -8,7 +8,15 @@ public class WordReader extends Reader{
     private int number;
     private Optional<String> maxValue;
     private int count;
+
+    boolean sort;
     static Collection<String> words = new ArrayList<>();
+
+    public WordReader(boolean sort) {
+        this.sort = sort;
+    }
+
+
     @Override
     public void readData() {
         while (scanner.hasNext()) {

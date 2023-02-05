@@ -1,23 +1,33 @@
 package sorting;
 
+import java.util.Arrays;
+
 public class Main {
 
     static String typeOfData;
 
+    static boolean sort;
+
 
     public static void main(final String[] args) {
-
-        typeOfData = args.length == 2 ? args[1] : "word";
+        if (Arrays.asList(args).contains("-sortIntegers")) {
+            typeOfData = "long";
+            sort = true;
+        } else {
+            typeOfData = args.length == 2 ? args[1] : "word";
+            sort = false;
+        }
         chooseReader();
+
     }
 
     private static void chooseReader() {
         switch(typeOfData) {
-            case "long" : new LongReader().doTask();
+            case "long" : new LongReader(sort).doTask();
             break;
-            case "line" : new LinesReader().doTask();
+            case "line" : new LinesReader(sort).doTask();
             break;
-            case "word" : new WordReader().doTask();
+            case "word" : new WordReader(sort).doTask();
             break;
             default:  break;
         }

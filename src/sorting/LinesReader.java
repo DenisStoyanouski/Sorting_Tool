@@ -9,7 +9,16 @@ public class LinesReader extends Reader{
     private Optional<String> maxValue;
     private int count;
 
+    boolean sort;
+
+
     static Collection<String> lines = new ArrayList<>();
+
+    public LinesReader(boolean sort) {
+        this.sort = sort;
+    }
+
+
     @Override
     public void readData() {
         while (scanner.hasNextLine()) {
@@ -30,5 +39,7 @@ public class LinesReader extends Reader{
         System.out.printf("Total lines: %d%n", number);
         System.out.printf("Total longest line: %n%s%n", maxValue.get());
         System.out.printf("(%d time(s), %d%%).%n", count, count * 100 / number);
+
+
     }
 }
