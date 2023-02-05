@@ -1,11 +1,12 @@
 package sorting;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class LinesReader extends Reader{
 
     Scanner scanner = new Scanner(System.in);
-    private int number;
+    private int totalLines;
     private Optional<String> maxValue;
     private int count;
 
@@ -13,6 +14,8 @@ public class LinesReader extends Reader{
 
 
     static Collection<String> lines = new ArrayList<>();
+
+    private Map<String, Integer> counter = new HashMap<>();
 
     public LinesReader(String sortingType) {
         this.sortingType = sortingType;
@@ -29,16 +32,28 @@ public class LinesReader extends Reader{
 
     @Override
     public void processData() {
-        number = lines.size();
-        maxValue = lines.stream().max(Comparator.comparing(String::length));
-        count = (int) lines.stream().filter(x -> x.equals(maxValue.get())).count();
+        totalLines = lines.size();
+        for (String line : lines) {
+            count = (int) lines.stream().filter(x -> x.equals(line)).count();
+            counter.put(line, count);
+        }
     }
 
     @Override
     public void printData() {
-        System.out.printf("Total lines: %d%n", number);
-        System.out.printf("Total longest line: %n%s%n", maxValue.get());
-        System.out.printf("(%d time(s), %d%%).%n", count, count * 100 / number);
+        if ("natural".equals(sortingType)) {
+            System.out.printf("Total numbers: %d%n", totalLines);
+            System.out.println("Sorted data: ");
+            lines.stream().sorted().forEach(x-> System.out.println(x + " "));
+        }
+        if ("byCount".equals(sortingType)) {
+            System.out.printf("Total numbers: %d%n", totalLines);
+            counter.entrySet()
+                    .stream()
+                    .sorted(Map.Entry.comparingByKey())
+                    .sorted(Comparator.comparingInt(Map.Entry::getValue))
+                    .forEach(x -> System.out.printf("%s: %d time(s), %d%% %n", x.getKey(), x.getValue(), x.getValue() * 100 / totalLines));
+        }
 
 
     }

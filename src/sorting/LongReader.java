@@ -36,9 +36,9 @@ public class LongReader extends Reader{
     @Override
     public void printData() {
         if ("natural".equals(sortingType)) {
-            System.out.printf("Total numbers: %d%n", totalNumber);
-            System.out.printf("Sorted data: %s%n", numbers.stream().sorted().collect(Collectors.toList())
-                    .toString().replaceAll("[,\\[\\]]",""));;
+            System.out.printf("Total numbers: %d.%n", totalNumber);
+            System.out.print("Sorted data: ");
+            numbers.stream().sorted().forEach(x-> System.out.print(x + " "));
         }
         if ("byCount".equals(sortingType)) {
             System.out.printf("Total numbers: %d%n", totalNumber);
@@ -47,7 +47,6 @@ public class LongReader extends Reader{
                     .sorted(Comparator.comparingLong(Map.Entry::getKey))
                     .sorted(Comparator.comparingInt(Map.Entry::getValue))
                     .forEach(x -> System.out.printf("%d: %d time(s), %d%% %n", x.getKey(), x.getValue(), x.getValue() * 100 / totalNumber));
-
         }
     }
 }
