@@ -1,15 +1,24 @@
 package sorting;
 
+import java.io.IOException;
+import java.util.List;
+
 public class Main {
 
-    static String typeOfData;
+    static String typeOfData = "word";
 
-    static String sortingType;
+    static String sortingType = "natural";
+
+    static String inputFile;
+
+    static String outputFile;
+
+    static List<String> options = List.of("-dataType", "-sortingType", "-inputFile", "-outputFile");
 
 
 
 
-    public static void main(final String[] args) {
+    public static void main(final String[] args) throws IOException {
         for (int i = 0; i < args.length; i++) {
             try {
                 if (args[i].matches("-dataType") && !args[i + 1].matches("-.*")) {
@@ -25,23 +34,38 @@ public class Main {
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("No sorting type defined!");
             }
-            if (args[i].matches("-.*") && !args[i].equals("-dataType") && !args[i].equals("-sortingType")) {
+            try {
+                if (args[i].matches("-inputFile") && !args[i + 1].matches("-.*")) {
+                    inputFile = args[i + 1];
+                }
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("No sorting type defined!");
+            }
+            try {
+                if (args[i].matches("-outputFile") && !args[i + 1].matches("-.*")) {
+                    outputFile = args[i + 1];
+                }
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("No sorting type defined!");
+            }
+            if (args[i].matches("-.*") && !options.contains(args[i])) {
                 System.out.printf("\"%s\" is not a valid parameter. It will be skipped.%n", args[i]);
             }
         }
+        System.out.println(outputFile);
         chooseReader();
-
     }
 
-    private static void chooseReader() {
+    private static void chooseReader() throws IOException {
         switch(typeOfData) {
-            case "long" : new LongsReader(sortingType).doTask();
+            case "long" : new LongsReader(sortingType, inputFile, outputFile).doTask();
             break;
-            case "line" : new LinesReader(sortingType).doTask();
+            case "line" : new LinesReader(sortingType, inputFile, outputFile).doTask();
             break;
-            case "word" : new WordsReader(sortingType).doTask();
+            case "word" : Reader readerWords = new WordsReader(sortingType, inputFile, outputFile);
+                readerWords.doTask();
             break;
-            default:  break;
+            default :  break;
         }
     }
 

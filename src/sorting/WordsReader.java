@@ -1,24 +1,29 @@
 package sorting;
 
+import java.io.IOException;
 import java.util.*;
 
 public class WordsReader extends Reader{
 
     Scanner scanner = new Scanner(System.in);
     private int totalWords;
-
-    private final String sortingType;
     static Collection<String> words = new ArrayList<>();
 
     private final Map<String, Integer> counter = new HashMap<>();
 
-    public WordsReader(String sortingType) {
+    public WordsReader(String sortingType, String inputFile, String outputFile) {
         this.sortingType = sortingType;
+        this.inputFile = inputFile;
+        this.outputFile = outputFile;
     }
 
+    @Override
+    public void readDataFromFile(String inputFile) {
+
+    }
 
     @Override
-    public void readData() {
+    public void readDataFromConsole() {
         while (scanner.hasNext()) {
             String word = scanner.next();
             if (!word.isBlank()) {
@@ -37,7 +42,7 @@ public class WordsReader extends Reader{
     }
 
     @Override
-    public void printData() {
+    public void printDataToConsole() {
         if ("natural".equals(sortingType)) {
             System.out.printf("Total words: %d%n", totalWords);
             System.out.print("Sorted data: ");
@@ -51,5 +56,10 @@ public class WordsReader extends Reader{
                     .sorted(Comparator.comparingInt(Map.Entry::getValue))
                     .forEach(x -> System.out.printf("%s: %d time(s), %d%% %n", x.getKey(), x.getValue(), x.getValue() * 100 / totalWords));
         }
+    }
+
+    @Override
+    public void printDataToFile(String outputFile) throws IOException {
+
     }
 }
