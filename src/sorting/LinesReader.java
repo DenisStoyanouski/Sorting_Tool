@@ -1,5 +1,6 @@
 package sorting;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
@@ -21,7 +22,14 @@ public class LinesReader extends Reader{
 
     @Override
     public void readDataFromFile(String inputFile) {
-
+        File file = new File(String.format(".\\%s", inputFile));
+        try (Scanner scanner = new Scanner(file)) {
+            while (scanner.hasNextLine()) {
+                lines.add(scanner.nextLine());
+            }
+        } catch (IOException e) {
+            System.out.println("File not found");
+        }
     }
 
     @Override

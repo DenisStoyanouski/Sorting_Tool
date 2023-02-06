@@ -44,7 +44,6 @@ public class LongsReader extends Reader{
         } catch (IOException e) {
             System.out.println("File not found");
         }
-
     }
 
     @Override

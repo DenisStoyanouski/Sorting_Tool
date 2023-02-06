@@ -1,5 +1,6 @@
 package sorting;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
@@ -19,7 +20,14 @@ public class WordsReader extends Reader{
 
     @Override
     public void readDataFromFile(String inputFile) {
-
+        File file = new File(String.format(".\\%s", inputFile));
+        try (Scanner scanner = new Scanner(file)) {
+            while (scanner.hasNext()) {
+                words.add(scanner.next());
+            }
+        } catch (IOException e) {
+            System.out.println("File not found");
+        }
     }
 
     @Override
