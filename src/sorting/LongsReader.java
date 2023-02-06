@@ -79,9 +79,7 @@ public class LongsReader extends Reader{
             if ("natural".equals(sortingType)) {
                 writer.printf("Total numbers: %d.%n", totalNumber);
                 writer.printf("Sorted data: ");
-                numbers.stream().sorted().forEach(x-> {
-                    writer.printf("%d ", x);
-                });
+                numbers.stream().sorted().forEach(x-> writer.printf("%d ", x));
             }
             if ("byCount".equals(sortingType)) {
                 writer.printf("Total numbers: %d%n", totalNumber);
@@ -89,9 +87,7 @@ public class LongsReader extends Reader{
                         .stream()
                         .sorted(Comparator.comparingLong(Map.Entry::getKey))
                         .sorted(Comparator.comparingInt(Map.Entry::getValue))
-                        .forEach(x -> {
-                            writer.printf("%d: %d time(s), %d%% %n", x.getKey(), x.getValue(), x.getValue() * 100 / totalNumber);
-                        });
+                        .forEach(x -> writer.printf("%d: %d time(s), %d%% %n", x.getKey(), x.getValue(), x.getValue() * 100 / totalNumber));
             }
         } catch (IOException e) {
             System.out.println("something wrong");

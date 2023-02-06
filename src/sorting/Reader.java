@@ -1,16 +1,13 @@
 package sorting;
-
-import java.io.IOException;
-
 public abstract class Reader {
     String sortingType;
     String inputFile;
     String outputFile;
 
-    Reader() {};
+    Reader() {}
 
 
-    public void doTask() throws IOException {
+    public void doTask() {
         if (this.inputFile == null) {
             readDataFromConsole();
         } else {

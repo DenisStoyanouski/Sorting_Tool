@@ -1,6 +1,5 @@
 package sorting;
 
-import java.io.IOException;
 import java.util.List;
 
 public class Main {
@@ -15,10 +14,7 @@ public class Main {
 
     static List<String> options = List.of("-dataType", "-sortingType", "-inputFile", "-outputFile");
 
-
-
-
-    public static void main(final String[] args) throws IOException {
+    public static void main(final String[] args) {
         for (int i = 0; i < args.length; i++) {
             try {
                 if (args[i].matches("-dataType") && !args[i + 1].matches("-.*")) {
@@ -55,14 +51,13 @@ public class Main {
         chooseReader();
     }
 
-    private static void chooseReader() throws IOException {
+    private static void chooseReader() {
         switch(typeOfData) {
             case "long" : new LongsReader(sortingType, inputFile, outputFile).doTask();
             break;
             case "line" : new LinesReader(sortingType, inputFile, outputFile).doTask();
             break;
-            case "word" : Reader readerWords = new WordsReader(sortingType, inputFile, outputFile);
-                readerWords.doTask();
+            case "word" : new WordsReader(sortingType, inputFile, outputFile).doTask();
             break;
             default :  break;
         }
