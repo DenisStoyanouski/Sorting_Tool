@@ -2,6 +2,7 @@ package sorting;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.*;
 
 public class LinesReader extends Reader{
@@ -64,12 +65,27 @@ public class LinesReader extends Reader{
                     .sorted(Comparator.comparingInt(Map.Entry::getValue))
                     .forEach(x -> System.out.printf("%s: %d time(s), %d%% %n", x.getKey(), x.getValue(), x.getValue() * 100 / totalLines));
         }
-
-
     }
 
     @Override
-    public void printDataToFile(String outputFile) throws IOException {
-
+    public void printDataToFile(String outputFile) {
+        File file = new File(String.format(".\\%s", outputFile));
+        try (var writer = new PrintWriter(file)) {
+            if ("natural".equals(sortingType)) {
+                writer.printf("Total words: %d%n", totalLines);
+                writer.print("Sorted data: ");
+                lines.stream().sorted().forEach(x-> writer.printf("%s ", x));
+            }
+            if ("byCount".equals(sortingType)) {
+                writer.printf("Total numbers: %d%n", totalLines);
+                counter.entrySet()
+                        .stream()
+                        .sorted(Map.Entry.comparingByKey())
+                        .sorted(Comparator.comparingInt(Map.Entry::getValue))
+                        .forEach(x -> writer.printf("%s: %d time(s), %d%% %n", x.getKey(), x.getValue(), x.getValue() * 100 / totalLines));
+            }
+        } catch (IOException e) {
+            System.out.println("something wrong");
+        }
     }
 }

@@ -52,7 +52,6 @@ public class Main {
                 System.out.printf("\"%s\" is not a valid parameter. It will be skipped.%n", args[i]);
             }
         }
-        System.out.println(outputFile);
         chooseReader();
     }
 

@@ -2,6 +2,7 @@ package sorting;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.*;
 
 public class WordsReader extends Reader{
@@ -67,7 +68,24 @@ public class WordsReader extends Reader{
     }
 
     @Override
-    public void printDataToFile(String outputFile) throws IOException {
-
+    public void printDataToFile(String outputFile) {
+        File file = new File(String.format(".\\%s", outputFile));
+        try (var writer = new PrintWriter(file)) {
+            if ("natural".equals(sortingType)) {
+                writer.printf("Total words: %d%n", totalWords);
+                writer.print("Sorted data: ");
+                words.stream().sorted().forEach(x-> writer.printf("%s ", x));
+            }
+            if ("byCount".equals(sortingType)) {
+                writer.printf("Total numbers: %d%n", totalWords);
+                counter.entrySet()
+                        .stream()
+                        .sorted(Map.Entry.comparingByKey())
+                        .sorted(Comparator.comparingInt(Map.Entry::getValue))
+                        .forEach(x -> writer.printf("%s: %d time(s), %d%% %n", x.getKey(), x.getValue(), x.getValue() * 100 / totalWords));
+            }
+        } catch (IOException e) {
+            System.out.println("something wrong");
+        }
     }
 }

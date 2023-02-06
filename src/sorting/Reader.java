@@ -28,5 +28,5 @@ public abstract class Reader {
     public abstract void readDataFromConsole();
     public abstract void processData();
     public abstract void printDataToConsole();
-    public abstract void printDataToFile(String outputFile) throws IOException;
+    public abstract void printDataToFile(String outputFile);
 }

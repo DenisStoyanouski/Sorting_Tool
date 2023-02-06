@@ -74,7 +74,6 @@ public class LongsReader extends Reader{
 
     @Override
     public void printDataToFile(String outputFile) {
-        System.out.println("I print something");
         File file = new File(String.format(".\\%s", outputFile));
         try (var writer = new PrintWriter(file)) {
             if ("natural".equals(sortingType)) {
@@ -94,7 +93,6 @@ public class LongsReader extends Reader{
                             writer.printf("%d: %d time(s), %d%% %n", x.getKey(), x.getValue(), x.getValue() * 100 / totalNumber);
                         });
             }
-
         } catch (IOException e) {
             System.out.println("something wrong");
         }
